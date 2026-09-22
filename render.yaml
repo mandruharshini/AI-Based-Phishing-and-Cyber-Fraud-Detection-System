@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: sentinel-phishing-detector
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && python train_model.py && gunicorn -w 2 -b 0.0.0.0:$PORT app:app
+    healthCheckPath: /api/health
